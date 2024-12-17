@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
+
 # Create your models here.
 class Position(models.Model):
     name = models.CharField(max_length=100)
@@ -26,7 +27,8 @@ class Task(models.Model):
     description = models.TextField()
     deadline = models.DateTimeField()
     is_completed = models.BooleanField(default=False)
-    priority = models.CharField(max_length=10, choices=PRIORITY_CHOICES, default='Medium')
+    priority = models.CharField(max_length=10,
+                                choices=PRIORITY_CHOICES,
+                                default='Medium')
     task_type = models.ForeignKey(TaskType, on_delete=models.CASCADE)
     assignees = models.ManyToManyField(Worker)
-
