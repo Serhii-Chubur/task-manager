@@ -6,6 +6,9 @@ from django.db import models
 class Position(models.Model):
     name = models.CharField(max_length=100)
 
+    def __str__(self):
+        return self.name
+
 
 class TaskType(models.Model):
     name = models.CharField(max_length=100)
@@ -31,4 +34,10 @@ class Task(models.Model):
                                 choices=PRIORITY_CHOICES,
                                 default='Medium')
     task_type = models.ForeignKey(TaskType, on_delete=models.CASCADE)
-    assignees = models.ManyToManyField(Worker)
+    assignees = models.ManyToManyField(Worker, related_name='assigned_tasks')
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        ordering = ['priority']

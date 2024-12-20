@@ -132,3 +132,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'task_tracker.Worker'
 
+LOGIN_REDIRECT_URL = "index"  # Route defined in home/urls.py
+
+LOGOUT_REDIRECT_URL = "/login/"
