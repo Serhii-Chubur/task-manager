@@ -2,6 +2,7 @@
 """
 Copyright (c) 2019 - present AppSeed.us
 """
+from multiprocessing.pool import worker
 
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
@@ -73,7 +74,8 @@ class AssigningForm(forms.ModelForm):
     assignees = forms.ModelMultipleChoiceField(
         queryset=Worker.objects.all(),
         widget=forms.CheckboxSelectMultiple(attrs={'class': 'form-select'}),
-        required=True
+        required=True,
+        label=''
     )
 
     class Meta:
@@ -84,10 +86,18 @@ class AssigningForm(forms.ModelForm):
 class TaskCreationForm(forms.ModelForm):
     assignees = forms.ModelMultipleChoiceField(
         queryset=Worker.objects.all(),
-        widget=forms.Select(attrs={'class': 'form-select'}),
-        required=True
+        widget=forms.CheckboxSelectMultiple(attrs={'class': 'form-select'}),
+        required=True,
+    )
+    deadline = forms.DateField(
+        widget=forms.DateInput(attrs={
+            'type': 'date',
+            'class': 'form-control',
+            'placeholder': 'Select a date',
+        }),
+        input_formats=['%Y-%m-%d'],
+        required=True,
     )
     class Meta:
         model = Task
-        fields = "__all__"
-
+        fields = ("name", "description", "deadline", "priority", "task_type", "assignees")

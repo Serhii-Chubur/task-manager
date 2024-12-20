@@ -37,7 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'crispy_forms',
     'task_tracker',
+    'crispy_bootstrap4'
 ]
 
 MIDDLEWARE = [
@@ -71,6 +73,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'task_manager.wsgi.application'
 
+CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases

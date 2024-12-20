@@ -1,4 +1,5 @@
 {% extends "layouts/base.html" %}
+{% load crispy_forms_filters %}
 
 {% block title %} Dashboard {% endblock %} 
 
@@ -14,6 +15,9 @@
                 <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
                 New Task
             </button>
+          </a>
+          <a class="btn btn-primary" style="float: right" href="{% url 'task_tracker:task-update' pk=task.pk %}">
+              Update
           </a>
           {% if task.is_completed == False %}
           <a class="btn btn-secondary" style="float: right" href="{% url 'task_tracker:task-complete' pk=task.pk %}">
@@ -72,25 +76,10 @@
                     </ul>
                     <div class="form-group mb-4">
                         <label for="assignees">Assign to task</label>
-                      <form method="post" action="{% url 'task_tracker:task-detail' task.pk %}">
+                      <form method="post" action="{% url 'task_tracker:task-detail' task.pk %}" novalidate>
                           {% csrf_token %}
-                          <div class="input-group">
-                              <div class="checkbox-container">
-                                  <ul>
-                                      {% for worker in form.assignees %}
-                                          <li style="list-style: none">
-                                              <label class="tag-checkbox">
-                                                  <input type="checkbox" name="assignees" value="{{ worker.pk }}">
-                                                  <span>{{ worker.choice_label }}</span>
-                                              </label>
-                                          </li>
-                                      {% endfor %}
-                                  </ul>
-                              </div>
-                          </div>
-                        <div class="mt-4">
+                          {{ form|crispy }}
                           <button type="submit" class="btn btn-primary">Assign</button>
-                        </div>
                       </form>
                     </div>
                   </div>

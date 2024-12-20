@@ -1,11 +1,8 @@
-from lib2to3.fixes.fix_input import context
-from tracemalloc import get_object_traceback
-
-from django.contrib.auth import authenticate, login, get_user
+from django.contrib.auth import authenticate, login, get_user, get_user_model
 from django.http import HttpRequest, HttpResponse, HttpResponseNotFound
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views import View
-from django.views.generic import CreateView, DetailView, ListView
+from django.urls import reverse
+from django.views.generic import CreateView, DetailView, ListView, UpdateView
 
 from task_tracker.forms import LoginForm, SignUpForm, AssigningForm, TaskCreationForm
 from task_tracker.models import Position, Worker, Task
@@ -96,6 +93,20 @@ class TaskCreateView(CreateView):
     form_class = TaskCreationForm
     template_name = "home/task_create.html"
 
+    def get_success_url(self):
+        pk = self.request.user.pk
+        return reverse("task_tracker:dashboard", kwargs={"pk": pk})
+
+
+class TaskUpdateView(UpdateView):
+    model = Task
+    form_class = TaskCreationForm
+    template_name = "home/task_create.html"
+
+    def get_success_url(self):
+        pk = self.request.user.pk
+        return reverse("task_tracker:dashboard", kwargs={"pk": pk})
+
 
 class TaskDetailView(DetailView):
     model = Task
@@ -104,22 +115,15 @@ class TaskDetailView(DetailView):
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
-        task_assignees = self.object.assignees.all()
-        print("Current assignees:", task_assignees)
         if self.object is None:
             return HttpResponseNotFound("Task not found")
         form = AssigningForm(request.POST)
 
         if form.is_valid():
-            print("Assignees to add:", form.cleaned_data['assignees'])
 
-            self.object.assignees.set(*form.cleaned_data['assignees'])
+            self.object.assignees.set(form.cleaned_data['assignees'])
             self.object.save()
-            task_assignees = self.object.assignees.all()
-            print("New assignees:", task_assignees)
             return redirect('task_tracker:task-detail', pk=self.object.pk)
-        else:
-            print("Form errors:", form.errors)
 
         return self.render_to_response(self.get_context_data(form=form))
 
