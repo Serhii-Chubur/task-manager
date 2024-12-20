@@ -2,7 +2,8 @@ from django.contrib.auth import authenticate, login, get_user, get_user_model
 from django.http import HttpRequest, HttpResponse, HttpResponseNotFound
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
-from django.views.generic import CreateView, DetailView, ListView, UpdateView
+from django.views import generic
+from django.views.generic import CreateView, DetailView, ListView, UpdateView, DeleteView
 
 from task_tracker.forms import LoginForm, SignUpForm, AssigningForm, TaskCreationForm
 from task_tracker.models import Position, Worker, Task
@@ -103,6 +104,14 @@ class TaskUpdateView(UpdateView):
     form_class = TaskCreationForm
     template_name = "home/task_create.html"
 
+    def get_success_url(self):
+        pk = self.request.user.pk
+        return reverse("task_tracker:dashboard", kwargs={"pk": pk})
+
+
+class TaskDeleteView(generic.DeleteView):
+    model = Task
+    template_name = "home/task_detail.html"
     def get_success_url(self):
         pk = self.request.user.pk
         return reverse("task_tracker:dashboard", kwargs={"pk": pk})

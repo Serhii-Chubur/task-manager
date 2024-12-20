@@ -43,8 +43,18 @@
                           <tbody>
                               {% for task in tasks %}
                               <tr>
-                                  <td><a href="{% url 'task_tracker:task-detail' task.pk%}">{{ task }}</a></td>
-                                  <td style="text-align: center;">{{ task.deadline }}</td>
+                                  <td><a href="{% url 'task_tracker:task-detail' task.pk%}">
+                                    {{ task }}
+                                    {% if task.is_completed %}
+                                    <span class="badge bg-success">Completed</span>
+                                    {% endif %}
+                                  </a></td>
+                                  <td style="text-align: center;">
+                                    {{ task.deadline }}
+                                    {% if task.deadline < user.date_joined %}
+                                    <span style="color: red">(Expired)</span>
+                                    {% endif %}
+                                  </td>
                                   <td style="text-align: right;">
                                       {% if task.priority == "Urgent" %}
                                           <span style="color: red;" class="fw-extrabold">{{ task.priority }}</span>

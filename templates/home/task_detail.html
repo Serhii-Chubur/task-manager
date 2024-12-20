@@ -16,16 +16,28 @@
                 New Task
             </button>
           </a>
-          <a class="btn btn-primary" style="float: right" href="{% url 'task_tracker:task-update' pk=task.pk %}">
-              Update
-          </a>
-          {% if task.is_completed == False %}
-          <a class="btn btn-secondary" style="float: right" href="{% url 'task_tracker:task-complete' pk=task.pk %}">
-            Complete
-          </a>
-            {% else %}
-            <p class="fs-3 fw-extrabold" style="color: limegreen; float: right">Copmleted</p>
-          {% endif %}
+            {% if task.is_completed == False %}
+                <form action="{% url 'task_tracker:task-delete' task.pk %}" method="post" style="float: right; margin-left: 10px">
+                  {% csrf_token %}
+              
+                  <input type="submit" value="Delete" class="btn btn-danger">
+                </form>
+                      
+                <a class="btn btn-primary" style="float: right; margin-left: 10px" href="{% url 'task_tracker:task-update' pk=task.pk %}">
+                    Update
+                </a>
+                {% if task.deadline < user.date_joined %}
+                <a class="btn btn-secondary" style="float: right; background-color: red" href="{% url 'task_tracker:task-complete' pk=task.pk %}">
+                  Complete
+                </a>
+                {% else %}
+                <a class="btn btn-secondary" style="float: right;" href="{% url 'task_tracker:task-complete' pk=task.pk %}">
+                  Complete
+                </a>
+                {% endif %}
+              {% else %}
+              <p class="fs-3 fw-extrabold" style="color: limegreen; float: right">Copmleted</p>
+            {% endif %}
         </div>
     </div>
     <div class="row">
@@ -51,7 +63,12 @@
                           <tbody>
                               <tr>
                                   <td>{{ task.description }}</td>
-                                  <td style="text-align: center; width: 200px;">{{ task.deadline }}</td>
+                                  <td style="text-align: center; width: 200px;">
+                                      {{ task.deadline }}
+                                      {% if task.deadline < user.date_joined %}
+                                        <span style="color: red">(Expired)</span>
+                                      {% endif %}
+                                  </td>
                                   <td style="text-align: right;">
                                       {% if task.priority == "Urgent" %}
                                           <span style="color: red;" class="fw-extrabold">{{ task.priority }}</span>
