@@ -1,11 +1,13 @@
 from lib2to3.fixes.fix_input import context
+from tracemalloc import get_object_traceback
 
 from django.contrib.auth import authenticate, login, get_user
-from django.http import HttpRequest, HttpResponse
+from django.http import HttpRequest, HttpResponse, HttpResponseNotFound
 from django.shortcuts import render, redirect, get_object_or_404
+from django.views import View
 from django.views.generic import CreateView, DetailView, ListView
 
-from task_tracker.forms import LoginForm, SignUpForm
+from task_tracker.forms import LoginForm, SignUpForm, AssigningForm, TaskCreationForm
 from task_tracker.models import Position, Worker, Task
 
 
@@ -89,13 +91,44 @@ class DashboardView(ListView):
         return context
 
 
-class CreateTaskView(CreateView):
-    pass
+class TaskCreateView(CreateView):
+    model = Task
+    form_class = TaskCreationForm
+    template_name = "home/task_create.html"
 
 
 class TaskDetailView(DetailView):
     model = Task
     template_name = "home/task_detail.html"
+    form_class = AssigningForm
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        task_assignees = self.object.assignees.all()
+        print("Current assignees:", task_assignees)
+        if self.object is None:
+            return HttpResponseNotFound("Task not found")
+        form = AssigningForm(request.POST)
+
+        if form.is_valid():
+            print("Assignees to add:", form.cleaned_data['assignees'])
+
+            self.object.assignees.set(*form.cleaned_data['assignees'])
+            self.object.save()
+            task_assignees = self.object.assignees.all()
+            print("New assignees:", task_assignees)
+            return redirect('task_tracker:task-detail', pk=self.object.pk)
+        else:
+            print("Form errors:", form.errors)
+
+        return self.render_to_response(self.get_context_data(form=form))
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        task = self.object
+        context['assignees'] = task.assignees.all()
+        context['form'] = AssigningForm(instance=task)
+        return context
 
 
 def task_completed(request, pk:int) -> HttpResponse:
@@ -103,3 +136,19 @@ def task_completed(request, pk:int) -> HttpResponse:
     task.is_completed = True
     task.save()
     return redirect("task_tracker:dashboard", get_user(request).pk)
+
+
+# def worker_assign_to_task(request, worker_pk: int, task_pk: int):
+#     worker = get_object_or_404(Worker, pk=worker_pk)
+#     task = get_object_or_404(Task, pk=task_pk)
+#
+#     form = AssigningForm(request.POST or None)
+#     if request.method == "POST":
+#
+#         if form.is_valid():
+#             worker = form.cleaned_data.get("worker")
+#             task.assignees.add(worker)
+#     return redirect("task_tracker:dashboard", get_user(request).pk)
+
+
+    # return render(request, "accounts/login.html", {"form": form, "msg": msg})

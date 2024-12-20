@@ -6,8 +6,7 @@ Copyright (c) 2019 - present AppSeed.us
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 
-from task_tracker.models import Worker, Position
-
+from task_tracker.models import Worker, Position, Task
 
 from django import forms
 
@@ -68,3 +67,27 @@ class SignUpForm(UserCreationForm):
 
         model = Worker
         fields = ('username', 'email', 'password1', 'password2', 'position')
+
+
+class AssigningForm(forms.ModelForm):
+    assignees = forms.ModelMultipleChoiceField(
+        queryset=Worker.objects.all(),
+        widget=forms.CheckboxSelectMultiple(attrs={'class': 'form-select'}),
+        required=True
+    )
+
+    class Meta:
+        model = Task
+        fields = ('assignees',)
+
+
+class TaskCreationForm(forms.ModelForm):
+    assignees = forms.ModelMultipleChoiceField(
+        queryset=Worker.objects.all(),
+        widget=forms.Select(attrs={'class': 'form-select'}),
+        required=True
+    )
+    class Meta:
+        model = Task
+        fields = "__all__"
+
