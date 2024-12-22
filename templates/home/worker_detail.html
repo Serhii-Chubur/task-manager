@@ -19,9 +19,11 @@
                           <a class="btn btn-primary" style="float: right; margin-left: 10px" href="{% url 'task_tracker:worker-update' pk=user.pk %}">
                               Update
                           </a>
-                          <a class="btn btn-danger" style="float: right; margin-left: 10px" href="{% url 'task_tracker:worker-delete' pk=user.pk %}">
-                              Delete
-                          </a>
+                          <form action="{% url 'task_tracker:worker-delete' user.pk %}" method="post" style="float: right; margin-left: 10px">
+                            {% csrf_token %}
+                        
+                            <input type="submit" value="Delete" class="btn btn-danger">
+                          </form>
                         </h2> 
                     </div>
                 </div>

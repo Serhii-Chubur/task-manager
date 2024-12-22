@@ -191,7 +191,7 @@ class WorkerUpdateView(LoginRequiredMixin, UpdateView):
         return reverse("task_tracker:dashboard", kwargs={"pk": pk})
 
 
-class WorkerDeleteView(LoginRequiredMixin, DeleteView):
+class WorkerDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Worker
     template_name = "home/worker_detail.html"
 
