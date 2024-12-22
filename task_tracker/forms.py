@@ -2,9 +2,6 @@
 """
 Copyright (c) 2019 - present AppSeed.us
 """
-from multiprocessing.pool import worker
-
-from django import forms
 from django.contrib.auth.forms import UserCreationForm
 
 from task_tracker.models import Worker, Position, Task
@@ -34,6 +31,20 @@ class SignUpForm(UserCreationForm):
         widget=forms.TextInput(
             attrs={
                 "placeholder": "Username",
+                "class": "form-control"
+            }
+        ))
+    first_name = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "First name",
+                "class": "form-control"
+            }
+        ))
+    last_name = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "Last name",
                 "class": "form-control"
             }
         ))
@@ -67,7 +78,8 @@ class SignUpForm(UserCreationForm):
     class Meta:
 
         model = Worker
-        fields = ('username', 'email', 'password1', 'password2', 'position')
+        fields = ('username', 'first_name', 'last_name',
+                  'email', 'password1', 'password2', 'position')
 
 
 class AssigningForm(forms.ModelForm):
@@ -98,6 +110,17 @@ class TaskCreationForm(forms.ModelForm):
         input_formats=['%Y-%m-%d'],
         required=True,
     )
+
     class Meta:
         model = Task
-        fields = ("name", "description", "deadline", "priority", "task_type", "assignees")
+        fields = ("name", "description", "deadline",
+                  "priority", "task_type", "assignees")
+
+
+class TaskSearchForm(forms.Form):
+    task = forms.CharField(
+        widget=forms.TextInput(attrs={"placeholder": "Task name"}),
+        label='',
+        required=True,
+        max_length=100
+    )

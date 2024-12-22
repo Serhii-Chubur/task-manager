@@ -1,0 +1,50 @@
+{% extends "layouts/base.html" %}
+{% load crispy_forms_filters %}
+
+{% block title %} {{ user }} {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+
+    <div class="py-4 row">
+        <div class="col-12 mb-4">
+            <div class="card bg-yellow-100 border-0 shadow">
+                <div class="card-header d-sm-flex flex-row align-items-center flex-0">
+                    <div class="d-block mb-3 mb-sm-0">
+                        <h2 class="fs-3 fw-extrabold">
+                          {{ user.username }}
+                          <a class="btn btn-primary" style="float: right; margin-left: 10px" href="{% url 'task_tracker:worker-update' pk=user.pk %}">
+                              Update
+                          </a>
+                          <a class="btn btn-danger" style="float: right; margin-left: 10px" href="{% url 'task_tracker:worker-delete' pk=user.pk %}">
+                              Delete
+                          </a>
+                        </h2> 
+                    </div>
+                </div>
+                <div class="card-body p-2">
+                    <div class="ct-chart-sales-value ct-double-octave ct-series-g">
+                    <ul style="list-style: none;">
+                      <li><span class="fw-extrabold">First name:</span> {{ user.first_name }}</li>
+                      <li><span class="fw-extrabold">Last name:</span> {{ user.last_name }}</li>
+                      <li><span class="fw-extrabold">Position:</span> {{ user.position }}</li>
+                      <li><span class="fw-extrabold">Email:</span> {{ user.email }}</li>
+                    </ul>
+                    <h3 class="fs-4 fw-extrabold">My tasks</h3>
+                      <ul>
+                        {% for task in tasks %}
+                        <li>{{ task }}</li>
+                        {% endfor %}
+                      </ul>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

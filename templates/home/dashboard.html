@@ -1,4 +1,5 @@
 {% extends "layouts/base.html" %}
+{% load crispy_forms_filters %}
 
 {% block title %} Dashboard {% endblock %} 
 
@@ -28,6 +29,10 @@
                 <div class="card-header d-sm-flex flex-row align-items-center flex-0">
                     <div class="d-block mb-3 mb-sm-0">
                         <h2 class="fs-3 fw-extrabold">My tasks</h2>
+                      <form action="" method="get" class="d-flex">
+                        {{ task_search_form|crispy }}
+                        <input type="submit" value="Search" class="btn btn-primary bg-gradient-primary text-white" style="margin-left: 10px;">
+                      </form>
                     </div>
                 </div>
                 <div class="card-body p-2">

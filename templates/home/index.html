@@ -6,7 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <!-- Primary Meta Tags -->
 <title>
-    Task Manager - Presentation | AppSeed
+    Task Manager
 </title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -72,16 +72,12 @@
                     <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
                         {% if user.is_authenticated %}
                             <li class="nav-item me-2">
-                                <a href="#" class="nav-link">{{ user.username }}</a>
+                                <a href="{% url 'task_tracker:worker-detail' user.pk %}" class="nav-link">{{ user.username }}</a>
                             </li>
                         {% endif %}
                         {% if user.is_superuser %}
                             <li class="nav-item me-2">
                                 <a href="/admin/auth/user/" class="nav-link">Admin</a>
-                            </li>
-                        {% else %}
-                            <li class="nav-item me-2">
-                                <a href="/settings.html" class="nav-link">Settings</a>
                             </li>
                         {% endif %}
                     </ul>
@@ -100,7 +96,7 @@
     <main>
 
         <!-- Hero -->
-        <section class="section-header overflow-hidden pt-7 pt-lg-8 pb-9 pb-lg-6 bg-primary text-white">
+        <section class="section-header overflow-hidden pt-5 pt-lg-6 pb-9 pb-lg-3 bg-primary text-white">
             <div class="container">
                 <div class="row">
                     <div class="col-12 text-center">
@@ -116,7 +112,7 @@
                 </div>
             </div>
         </section>
-        <section class="section section-lg bg-soft pb-3 pt-lg-3">
+        <section class="section section-lg bg-soft pb-2 pt-lg-2">
             <div class="container">
                 <div class="row justify-content-center mb-5 mb-lg-0">
                     <div class="col-6 col-md-3 text-center mb-4">
@@ -145,7 +141,7 @@
         </section>
     </main>
 
-    <footer class="footer py-6 bg-gray-800 text-white">
+    <footer style="position: fixed; bottom: 0; width: 100%; flex: 1" class="footer py-4 bg-gray-800 text-white">
         <div class="container">
             <div class="row">
                 <div class="col mb-md-0">
@@ -154,14 +150,12 @@
                         <span>Mate Academy</span>
                     </a><br>
                 <div class="d-flex text-center justify-content-center align-items-center" role="contentinfo">
-                    <p class="fw-normal font-small mb-0">&copy; <span class="current-year">2024</span> - coded by Serhii Chubur.</p>
+                    <p class="fw-normal font-small mb-0">&copy; <span class="current-year">2024</span> - coded by Serhii Chubur</p>
                     </div>
                 </div>
             </div>
         </div>
     </footer>
-
-{#    {% include 'includes/scripts.html' %}#}
 
 </body>
 </html>
