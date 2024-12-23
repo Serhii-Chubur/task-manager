@@ -1,7 +1,7 @@
 from django.contrib.auth import authenticate, login, get_user
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpRequest, HttpResponse, HttpResponseNotFound
+from django.http import HttpResponse, HttpResponseNotFound
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.views import generic
@@ -9,8 +9,7 @@ from django.views.generic import (CreateView,
                                   DetailView,
                                   ListView,
                                   UpdateView,
-                                  DeleteView)
-
+                                  View)
 from task_tracker.forms import (LoginForm,
                                 SignUpForm,
                                 AssigningForm,
@@ -20,25 +19,33 @@ from task_tracker.models import Position, Worker, Task
 
 
 # Create your views here.
-@login_required
-def index(request: HttpRequest) -> HttpResponse:
-    positions = Position.objects.all().count()
-    users = Worker.objects.all().count()
-    tasks = Task.objects.filter(is_completed=False).count()
-    context = {
-        "positions": positions,
-        "users": users,
-        "tasks": tasks,
-    }
-    return render(request, "home/index.html", context=context)
+
+class IndexView(LoginRequiredMixin, generic.ListView):
+    model = Task
+    template_name = "home/index.html"
+    queryset = Task.objects.all().count()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        positions = Position.objects.all().count()
+        users = Worker.objects.all().count()
+        tasks = Task.objects.filter(is_completed=False).count()
+        context["positions"] = positions
+        context["users"] = users
+        context["tasks"] = tasks
+        return context
 
 
-def login_view(request):
-    form = LoginForm(request.POST or None)
+class LoginView(View):
+    template_name = "registration/login.html"
 
-    msg = None
+    def get(self, request, *args, **kwargs):
+        form = LoginForm()
+        return render(request, self.template_name, {"form": form, "msg": None})
 
-    if request.method == "POST":
+    def post(self, request, *args, **kwargs):
+        form = LoginForm(request.POST)
+        msg = None
 
         if form.is_valid():
             username = form.cleaned_data.get("username")
@@ -52,27 +59,33 @@ def login_view(request):
         else:
             msg = "Error validating the form"
 
-    return render(request, "registration/login.html",
-                  {"form": form, "msg": msg})
+        return render(request, self.template_name, {"form": form, "msg": msg})
 
 
-def register_user(request):
-    msg = None
-    success = False
+class RegisterUserView(View):
+    template_name = "accounts/register.html"
 
-    if request.method == "POST":
-        form = SignUpForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect("/login/")
-
-        else:
-            msg = "Form is not valid"
-    else:
+    def get(self, request, *args, **kwargs):
         form = SignUpForm()
+        return render(request, self.template_name, {"form": form, "msg": None})
 
-    return render(request, "accounts/register.html",
-                  {"form": form, "msg": msg, "success": success})
+    def post(self, request, *args, **kwargs):
+        msg = None
+        success = False
+
+        if request.method == "POST":
+            form = SignUpForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect("/login/")
+
+            else:
+                msg = "Form is not valid"
+        else:
+            form = SignUpForm()
+
+        return render(request, "accounts/register.html",
+                      {"form": form, "msg": msg, "success": success})
 
 
 class DashboardView(LoginRequiredMixin, ListView):
@@ -104,6 +117,14 @@ class DashboardView(LoginRequiredMixin, ListView):
             initial={"task": task}
         )
         return context
+
+
+@login_required
+def task_completed(request, pk: int) -> HttpResponse:
+    task = get_object_or_404(Task, pk=pk)
+    task.is_completed = True
+    task.save()
+    return redirect("task_tracker:dashboard", get_user(request).pk)
 
 
 class TaskCreateView(LoginRequiredMixin, CreateView):
@@ -160,14 +181,6 @@ class TaskDetailView(LoginRequiredMixin, DetailView):
         context["assignees"] = task.assignees.all()
         context["form"] = AssigningForm(instance=task)
         return context
-
-
-@login_required
-def task_completed(request, pk: int) -> HttpResponse:
-    task = get_object_or_404(Task, pk=pk)
-    task.is_completed = True
-    task.save()
-    return redirect("task_tracker:dashboard", get_user(request).pk)
 
 
 class WorkerDetailView(LoginRequiredMixin, DetailView):
