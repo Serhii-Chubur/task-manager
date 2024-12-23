@@ -2,14 +2,13 @@ from django.urls import path
 
 from task_tracker.views import (TaskDetailView,
                                 DashboardView,
-                                task_completed,
                                 TaskCreateView,
                                 TaskUpdateView,
                                 TaskDeleteView,
                                 WorkerUpdateView,
                                 WorkerDeleteView,
                                 WorkerDetailView,
-                                IndexView)
+                                IndexView, TaskCompletedView)
 
 urlpatterns = [
     path("", IndexView.as_view(), name="index"),
@@ -20,7 +19,7 @@ urlpatterns = [
          TaskDetailView.as_view(),
          name="task-detail"),
     path("task-detail/<int:pk>/complete/",
-         task_completed,
+         TaskCompletedView.as_view(),
          name="task-complete"),
     path("task-create/",
          TaskCreateView.as_view(),

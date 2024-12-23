@@ -27,13 +27,15 @@
                     Update
                 </a>
                 {% if task.deadline < user.date_joined %}
-                <a class="btn btn-secondary" style="float: right; background-color: red" href="{% url 'task_tracker:task-complete' pk=task.pk %}">
-                  Complete
-                </a>
+                <form style="background-color: red; float: right;" class="d-flex" method="post" action="{% url 'task_tracker:task-complete' object.pk %}">
+                  {% csrf_token %}
+                  <input type="submit" value="Complete" class="btn btn-secondary">
+                </form>
                 {% else %}
-                <a class="btn btn-secondary" style="float: right;" href="{% url 'task_tracker:task-complete' pk=task.pk %}">
-                  Complete
-                </a>
+                <form style="float: right;"  class="d-flex" method="post" action="{% url 'task_tracker:task-complete' object.pk %}">
+                  {% csrf_token %}
+                  <input type="submit" value="Complete" class="btn btn-secondary">
+                </form>
                 {% endif %}
               {% else %}
               <p class="fs-3 fw-extrabold" style="color: limegreen; float: right">Copmleted</p>

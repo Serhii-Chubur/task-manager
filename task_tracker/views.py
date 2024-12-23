@@ -1,7 +1,6 @@
 from django.contrib.auth import authenticate, login, get_user
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponse, HttpResponseNotFound
+from django.http import HttpResponseNotFound
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.views import generic
@@ -119,12 +118,17 @@ class DashboardView(LoginRequiredMixin, ListView):
         return context
 
 
-@login_required
-def task_completed(request, pk: int) -> HttpResponse:
-    task = get_object_or_404(Task, pk=pk)
-    task.is_completed = True
-    task.save()
-    return redirect("task_tracker:dashboard", get_user(request).pk)
+class TaskCompletedView(LoginRequiredMixin, DetailView):
+    model = Task
+
+    def get_object(self, queryset=None):
+        return get_object_or_404(Task, pk=self.kwargs.get("pk"))
+
+    def post(self, request, *args, **kwargs):
+        task = self.get_object()
+        task.is_completed = True
+        task.save()
+        return redirect("task_tracker:dashboard", get_user(request).pk)
 
 
 class TaskCreateView(LoginRequiredMixin, CreateView):
