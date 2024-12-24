@@ -1,0 +1,40 @@
+{% extends "layouts/base.html" %}
+{% load crispy_forms_filters %}
+
+{% block title %} Dashboard {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <div class="py-4">
+        <div class="dropdown">
+          <h2 class="fs-3 fw-extrabold">
+            {{ object|yesno:"Update,Create new" }} task</h2>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 mb-4">
+            <div class="card bg-yellow-100 border-0 shadow">
+               
+                <div class="card-body p-2">
+                    <div class="ct-chart-sales-value ct-double-octave ct-series-g">
+               
+                      <form action="" method="post" novalidate>
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        <input type="submit" value="{{ object|yesno:"Update,Create" }}" class="btn btn-primary">
+                      </form>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}
+
+

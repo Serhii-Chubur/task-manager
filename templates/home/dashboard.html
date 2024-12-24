@@ -1,0 +1,86 @@
+{% extends "layouts/base.html" %}
+{% load crispy_forms_filters %}
+
+{% block title %} Dashboard {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <div class="py-4">
+        <div class="dropdown">
+            <a href="{% url 'task_tracker:task-create' %}">
+            <button class="btn btn-gray-800 d-inline-flex align-items-center me-2 dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+                New Task
+            </button>
+          </a>
+          <span class="fs-2 fw-extrabold" style="float: right">
+            <a href="?show_all=true" class="btn btn-primary {% if show_all %}active{% endif %}">Show All Tasks</a>
+            <a href="?show_all=false" class="btn btn-secondary {% if not show_all %}active{% endif %}">Show Incomplete Tasks</a>
+
+          </span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 mb-4">
+            <div class="card bg-yellow-100 border-0 shadow">
+                <div class="card-header d-sm-flex flex-row align-items-center flex-0">
+                    <div class="d-block mb-3 mb-sm-0">
+                        <h2 class="fs-3 fw-extrabold">My tasks</h2>
+                      <form action="" method="get" class="d-flex">
+                        {{ task_search_form|crispy }}
+                        <input type="submit" value="Search" class="btn btn-primary bg-gradient-primary text-white" style="margin-left: 10px;">
+                      </form>
+                    </div>
+                </div>
+                <div class="card-body p-2">
+                    <div class="ct-chart-sales-value ct-double-octave ct-series-g">
+                      <table style="border-collapse: collapse; width: 100%;">
+                          <thead>
+                              <tr>
+                                  <th style="text-align: left;">Task</th>
+                                  <th style="text-align: center;">Deadline</th>
+                                  <th style="text-align: right;">Priority</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              {% for task in tasks %}
+                              <tr>
+                                  <td><a href="{% url 'task_tracker:task-detail' task.pk%}">
+                                    {{ task }}
+                                    {% if task.is_completed %}
+                                    <span class="badge bg-success">Completed</span>
+                                    {% endif %}
+                                  </a></td>
+                                  <td style="text-align: center;">
+                                    {{ task.deadline }}
+                                    {% if task.deadline < user.date_joined %}
+                                    <span style="color: red">(Expired)</span>
+                                    {% endif %}
+                                  </td>
+                                  <td style="text-align: right;">
+                                      {% if task.priority == "Urgent" %}
+                                          <span style="color: red;" class="fw-extrabold">{{ task.priority }}</span>
+                                      {% elif task.priority == "High" %}
+                                          <span style="color: orangered;" class="fw-extrabold">{{ task.priority }}</span>
+                                      {% elif task.priority == "Medium" %}
+                                          <span style="color: orange;" class="fw-extrabold">{{ task.priority }}</span>
+                                      {% elif task.priority == "Low" %}
+                                          <span style="color: green;" class="fw-extrabold">{{ task.priority }}</span>
+                                      {% endif %}
+                                  </td>
+                              </tr>
+                              {% endfor %}
+                          </tbody>
+                      </table>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}
