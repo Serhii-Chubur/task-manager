@@ -1,0 +1,774 @@
+[
+{
+    "model": "task_tracker.position",
+    "pk": 1,
+    "fields": {
+        "name": "Developer"
+    }
+},
+{
+    "model": "task_tracker.position",
+    "pk": 2,
+    "fields": {
+        "name": "Project Manager"
+    }
+},
+{
+    "model": "task_tracker.position",
+    "pk": 3,
+    "fields": {
+        "name": "QA"
+    }
+},
+{
+    "model": "task_tracker.position",
+    "pk": 4,
+    "fields": {
+        "name": "Designer"
+    }
+},
+{
+    "model": "task_tracker.position",
+    "pk": 5,
+    "fields": {
+        "name": "DevOps"
+    }
+},
+{
+    "model": "task_tracker.tasktype",
+    "pk": 1,
+    "fields": {
+        "name": "Bug"
+    }
+},
+{
+    "model": "task_tracker.tasktype",
+    "pk": 2,
+    "fields": {
+        "name": "New Feature"
+    }
+},
+{
+    "model": "task_tracker.tasktype",
+    "pk": 3,
+    "fields": {
+        "name": "Refactoring"
+    }
+},
+{
+    "model": "task_tracker.tasktype",
+    "pk": 4,
+    "fields": {
+        "name": "QA Task"
+    }
+},
+{
+    "model": "task_tracker.tasktype",
+    "pk": 5,
+    "fields": {
+        "name": "Documentation"
+    }
+},
+{
+    "model": "task_tracker.worker",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$260000$example_salt$example_hashed_password",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "alicejohnson",
+        "first_name": "Alice",
+        "last_name": "Johnson",
+        "email": "alice.johnson@example.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-12-11T13:47:29.775Z",
+        "position": 1,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "task_tracker.worker",
+    "pk": 2,
+    "fields": {
+        "password": "pbkdf2_sha256$260000$example_salt$example_hashed_password",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "bobsmith",
+        "first_name": "Bob",
+        "last_name": "Smith",
+        "email": "bob.smith@example.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-12-11T13:47:29.788Z",
+        "position": 2,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "task_tracker.worker",
+    "pk": 3,
+    "fields": {
+        "password": "pbkdf2_sha256$260000$example_salt$example_hashed_password",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "charliebrown",
+        "first_name": "Charlie",
+        "last_name": "Brown",
+        "email": "charlie.brown@example.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-12-11T13:47:29.789Z",
+        "position": 1,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "task_tracker.worker",
+    "pk": 4,
+    "fields": {
+        "password": "pbkdf2_sha256$260000$example_salt$example_hashed_password",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "dianaprince",
+        "first_name": "Diana",
+        "last_name": "Prince",
+        "email": "diana.prince@example.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-12-11T13:47:29.789Z",
+        "position": 3,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "task_tracker.worker",
+    "pk": 5,
+    "fields": {
+        "password": "pbkdf2_sha256$260000$example_salt$example_hashed_password",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "ethanhunt",
+        "first_name": "Ethan",
+        "last_name": "Hunt",
+        "email": "ethan.hunt@example.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-12-11T13:47:29.789Z",
+        "position": 2,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "task_tracker.worker",
+    "pk": 6,
+    "fields": {
+        "password": "pbkdf2_sha256$260000$example_salt$example_hashed_password",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "fionagallagher",
+        "first_name": "Fiona",
+        "last_name": "Gallagher",
+        "email": "fiona.gallagher@example.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-12-11T13:47:29.790Z",
+        "position": 1,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "task_tracker.worker",
+    "pk": 7,
+    "fields": {
+        "password": "password7",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "worker7",
+        "first_name": "David",
+        "last_name": "Jones",
+        "email": "worker7@example.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-12-11T13:37:11.508Z",
+        "position": 2,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "task_tracker.worker",
+    "pk": 8,
+    "fields": {
+        "password": "password21",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "worker21",
+        "first_name": "Emma",
+        "last_name": "Janice",
+        "email": "worker21@example.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-12-11T13:40:34.510Z",
+        "position": 1,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "task_tracker.worker",
+    "pk": 9,
+    "fields": {
+        "password": "password22",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "worker22",
+        "first_name": "Chris",
+        "last_name": "Davis",
+        "email": "worker22@example.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-12-11T13:40:34.526Z",
+        "position": 2,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "task_tracker.worker",
+    "pk": 10,
+    "fields": {
+        "password": "password23",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "worker23",
+        "first_name": "Emma",
+        "last_name": "Wilson",
+        "email": "worker23@example.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-12-11T13:40:34.528Z",
+        "position": 3,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "task_tracker.worker",
+    "pk": 11,
+    "fields": {
+        "password": "password24",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "worker24",
+        "first_name": "Oliver",
+        "last_name": "Martinez",
+        "email": "worker24@example.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-12-11T13:40:34.529Z",
+        "position": 4,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "task_tracker.worker",
+    "pk": 12,
+    "fields": {
+        "password": "password25",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "worker25",
+        "first_name": "Sophia",
+        "last_name": "Garcia",
+        "email": "worker25@example.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-12-11T13:40:34.531Z",
+        "position": 5,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "task_tracker.worker",
+    "pk": 13,
+    "fields": {
+        "password": "password26",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "worker26",
+        "first_name": "Liam",
+        "last_name": "Rodriguez",
+        "email": "worker26@example.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-12-11T13:40:34.533Z",
+        "position": 1,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "task_tracker.worker",
+    "pk": 14,
+    "fields": {
+        "password": "password27",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "worker27",
+        "first_name": "Mia",
+        "last_name": "Hernandez",
+        "email": "worker27@example.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-12-11T13:40:34.534Z",
+        "position": 2,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "task_tracker.worker",
+    "pk": 15,
+    "fields": {
+        "password": "pbkdf2_sha256$260000$example_salt$example_hashed_password",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "harrypotter",
+        "first_name": "Harry",
+        "last_name": "Potter",
+        "email": "harry.potter@example.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-12-11T13:48:59.408Z",
+        "position": 2,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "task_tracker.worker",
+    "pk": 16,
+    "fields": {
+        "password": "pbkdf2_sha256$260000$example_salt$example_hashed_password",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "isabellacage",
+        "first_name": "Isabella",
+        "last_name": "Cage",
+        "email": "isabella.cage@example.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-12-11T13:48:59.410Z",
+        "position": 3,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "task_tracker.worker",
+    "pk": 17,
+    "fields": {
+        "password": "pbkdf2_sha256$260000$example_salt$example_hashed_password",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "jackbauer",
+        "first_name": "Jack",
+        "last_name": "Bauer",
+        "email": "jack.bauer@example.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-12-11T13:48:59.410Z",
+        "position": 1,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "task_tracker.worker",
+    "pk": 18,
+    "fields": {
+        "password": "pbkdf2_sha256$260000$example_salt$example_hashed_password",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "karenwalker",
+        "first_name": "Karen",
+        "last_name": "Walker",
+        "email": "karen.walker@example.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-12-11T13:48:59.411Z",
+        "position": 2,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "task_tracker.worker",
+    "pk": 19,
+    "fields": {
+        "password": "pbkdf2_sha256$260000$example_salt$example_hashed_password",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "lindseylohan",
+        "first_name": "Lindsey",
+        "last_name": "Lohan",
+        "email": "lindsey.lohan@example.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-12-11T13:48:59.411Z",
+        "position": 3,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "task_tracker.worker",
+    "pk": 20,
+    "fields": {
+        "password": "pbkdf2_sha256$260000$example_salt$example_hashed_password",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "georgeclooney",
+        "first_name": "George",
+        "last_name": "Clooney",
+        "email": "george.clooney@example.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-12-11T13:48:59.398Z",
+        "position": 1,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "task_tracker.worker",
+    "pk": 28,
+    "fields": {
+        "password": "pbkdf2_sha256$870000$Y4xdkSfqBGLoUAir3X2kLX$iM3+vh+sBfmfdNSz1YsaMhedPb/FArj91upKbvSj53I=",
+        "last_login": "2024-12-24T16:01:35.354Z",
+        "is_superuser": true,
+        "username": "admin",
+        "first_name": "Admin",
+        "last_name": "Admin",
+        "email": "admin@admin.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-12-17T18:58:52.003Z",
+        "position": 1,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "task_tracker.worker",
+    "pk": 29,
+    "fields": {
+        "password": "pbkdf2_sha256$870000$kaMlQq1NifMGVBtfdOs9Go$PYWWX5CWrs+Zl7KCmTO2AGJHHi/Uvogkpp4T/2tmf5Y=",
+        "last_login": "2024-12-22T19:55:02.678Z",
+        "is_superuser": false,
+        "username": "testuser",
+        "first_name": "Test",
+        "last_name": "User",
+        "email": "test@user.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-12-22T19:52:53.267Z",
+        "position": 3,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "task_tracker.worker",
+    "pk": 33,
+    "fields": {
+        "password": "pbkdf2_sha256$870000$eKq98HGwBlosAWiqGBaVjP$qhp/CTEknG7vkow55UhGD3esr/reNQMGDxXCJkf20Os=",
+        "last_login": "2024-12-23T12:24:06.931Z",
+        "is_superuser": false,
+        "username": "test",
+        "first_name": "test",
+        "last_name": "test",
+        "email": "test@test.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-12-23T12:23:54.498Z",
+        "position": 5,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "task_tracker.task",
+    "pk": 1,
+    "fields": {
+        "name": "Resolve login issue",
+        "description": "Address the login problem on the homepage.",
+        "deadline": "2024-01-11T10:00:00Z",
+        "is_completed": false,
+        "priority": "Urgent",
+        "task_type": 1,
+        "assignees": [
+            1,
+            2
+        ]
+    }
+},
+{
+    "model": "task_tracker.task",
+    "pk": 2,
+    "fields": {
+        "name": "Develop feature Y",
+        "description": "Implement feature Y in the application.",
+        "deadline": "2024-01-12T12:00:00Z",
+        "is_completed": false,
+        "priority": "High",
+        "task_type": 2,
+        "assignees": [
+            3,
+            4
+        ]
+    }
+},
+{
+    "model": "task_tracker.task",
+    "pk": 3,
+    "fields": {
+        "name": "Code cleanup",
+        "description": "Clean up the codebase for improved maintainability.",
+        "deadline": "2024-01-13T14:00:00Z",
+        "is_completed": false,
+        "priority": "Medium",
+        "task_type": 3,
+        "assignees": [
+            5,
+            6
+        ]
+    }
+},
+{
+    "model": "task_tracker.task",
+    "pk": 4,
+    "fields": {
+        "name": "Conduct QA testing",
+        "description": "Carry out QA testing on the latest version.",
+        "deadline": "2024-01-14T16:00:00Z",
+        "is_completed": false,
+        "priority": "Low",
+        "task_type": 4,
+        "assignees": [
+            7,
+            8
+        ]
+    }
+},
+{
+    "model": "task_tracker.task",
+    "pk": 5,
+    "fields": {
+        "name": "Create user documentation",
+        "description": "Draft documentation for the newly added feature.",
+        "deadline": "2024-01-15T18:00:00Z",
+        "is_completed": false,
+        "priority": "Medium",
+        "task_type": 5,
+        "assignees": [
+            9,
+            10
+        ]
+    }
+},
+{
+    "model": "task_tracker.task",
+    "pk": 6,
+    "fields": {
+        "name": "Revamp user interface",
+        "description": "Improve the user interface for enhanced usability.",
+        "deadline": "2024-01-16T10:00:00Z",
+        "is_completed": false,
+        "priority": "Urgent",
+        "task_type": 2,
+        "assignees": [
+            11,
+            12
+        ]
+    }
+},
+{
+    "model": "task_tracker.task",
+    "pk": 7,
+    "fields": {
+        "name": "Fix session timeout issue",
+        "description": "Resolve the problem with session timeouts.",
+        "deadline": "2024-01-17T12:00:00Z",
+        "is_completed": false,
+        "priority": "High",
+        "task_type": 1,
+        "assignees": [
+            13,
+            14
+        ]
+    }
+},
+{
+    "model": "task_tracker.task",
+    "pk": 8,
+    "fields": {
+        "name": "Enhance database performance",
+        "description": "Improve database performance for quicker responses.",
+        "deadline": "2024-01-18T14:00:00Z",
+        "is_completed": false,
+        "priority": "Medium",
+        "task_type": 3,
+        "assignees": [
+            15,
+            16
+        ]
+    }
+},
+{
+    "model": "task_tracker.task",
+    "pk": 9,
+    "fields": {
+        "name": "Evaluate user feedback",
+        "description": "Review user feedback for potential enhancements.",
+        "deadline": "2024-01-19T16:00:00Z",
+        "is_completed": false,
+        "priority": "Low",
+        "task_type": 4,
+        "assignees": [
+            17,
+            18
+        ]
+    }
+},
+{
+    "model": "task_tracker.task",
+    "pk": 10,
+    "fields": {
+        "name": "Integrate new APIs",
+        "description": "Connect and integrate new third-party APIs.",
+        "deadline": "2024-01-19T16:00:00Z",
+        "is_completed": false,
+        "priority": "Low",
+        "task_type": 2,
+        "assignees": [
+            20,
+            19
+        ]
+    }
+},
+{
+    "model": "task_tracker.task",
+    "pk": 11,
+    "fields": {
+        "name": "Implement user authentication",
+        "description": "Develop a secure user authentication system.",
+        "deadline": "2025-01-20T10:00:00Z",
+        "is_completed": false,
+        "priority": "High",
+        "task_type": 1,
+        "assignees": [
+            1,
+            2
+        ]
+    }
+},
+{
+    "model": "task_tracker.task",
+    "pk": 12,
+    "fields": {
+        "name": "Create unit tests",
+        "description": "Write unit tests for the existing codebase.",
+        "deadline": "2025-01-21T12:00:00Z",
+        "is_completed": true,
+        "priority": "Medium",
+        "task_type": 3,
+        "assignees": [
+            28,
+            3,
+            4,
+            20
+        ]
+    }
+},
+{
+    "model": "task_tracker.task",
+    "pk": 13,
+    "fields": {
+        "name": "Design database schema",
+        "description": "Create a new database schema for the application.",
+        "deadline": "2025-01-22T14:00:00Z",
+        "is_completed": false,
+        "priority": "Urgent",
+        "task_type": 2,
+        "assignees": [
+            5,
+            6
+        ]
+    }
+},
+{
+    "model": "task_tracker.task",
+    "pk": 14,
+    "fields": {
+        "name": "Conduct performance testing",
+        "description": "Perform performance testing on the application.",
+        "deadline": "2025-01-23T16:00:00Z",
+        "is_completed": false,
+        "priority": "Medium",
+        "task_type": 4,
+        "assignees": [
+            7,
+            8
+        ]
+    }
+},
+{
+    "model": "task_tracker.task",
+    "pk": 15,
+    "fields": {
+        "name": "Prepare deployment plan",
+        "description": "Create a deployment plan for the upcoming release. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        "deadline": "2025-01-24T18:00:00Z",
+        "is_completed": false,
+        "priority": "High",
+        "task_type": 5,
+        "assignees": [
+            28,
+            9,
+            10
+        ]
+    }
+},
+{
+    "model": "task_tracker.task",
+    "pk": 24,
+    "fields": {
+        "name": "Test Name",
+        "description": "Test Description",
+        "deadline": "2025-01-04T00:00:00Z",
+        "is_completed": true,
+        "priority": "Medium",
+        "task_type": 2,
+        "assignees": [
+            28,
+            1,
+            4,
+            10,
+            6,
+            16,
+            18,
+            12
+        ]
+    }
+}
+]
